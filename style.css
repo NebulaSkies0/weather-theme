@@ -1,9 +1,11 @@
 :root {
-    --background: #8b008b;
+    --background: white;
+    --text: black
 }
 
 body {
     background-color: var(--background);
+    
 }
 
 h1 {
