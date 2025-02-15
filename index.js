@@ -15,8 +15,19 @@ async function getWeather(latitude, longitude){
         }
 
         const json = await response.json()
-        console.log(json.latitude)
+
+        updatePrecipitation(json.current.precipitation)
+        updatePrecipitation(0.1)
+
     } catch (error) {
         console.error(error.message)
     }
+}
+
+function updatePrecipitation(x) {
+    root.style.setProperty('--background', color(255*x, 255*x, 255*x))
+}
+
+function color (r, g, b) {
+    return `rgb(${r}, ${g}, ${b})`
 }
