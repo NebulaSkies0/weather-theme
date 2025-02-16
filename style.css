@@ -1,9 +1,7 @@
 :root {
-    --background: #8dbbc9;
+    --background: black;
     --text: black;
-    --primary: black;
-    --secondary: black;
-    --tertiary: black;
+    --accent: black;
 }
 
 body {
@@ -28,5 +26,7 @@ menu img {
     height: 8em;
     object-fit: fill;
     border-radius: 2em;
-    padding: 1em;
+    border-color: var(--primary);
+    border-style: solid;
+    margin: 1em;
 }
