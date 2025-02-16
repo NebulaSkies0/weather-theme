@@ -8,14 +8,35 @@
     <link rel="icon" href="favicon.svg">
 </head>
 <body>
+    <h1 id="title" style="text-align: center; font-size: 2.5rem; font-weight: bold; margin-top: 20px;">Weather Theme :></h1>
     <header>
         <span>🌡️<span id="temperature">--</span>°C</span>
         <span>☁️<span id="cloud">--</span>%</span>
         <span>💧<span id="precipitation">--</span>mm</span>
         <span>🌬️<span id="wind">--</span>km/h</span>
     </header>
-    <div id="weather-info">
-        
+    <div id="weather-info" style="text-align: center;">
+        <label for="mood select">How does the weather make you feel?</label>
+        <select id="mood-select" onchange="document.getElementById('mood-emoji').textContent = this.value; document.getElementById('mood-label').style.display = 'none'; document.getElementById('mood-select').style.display = 'none';">
+            <option value="😊😁🤩">Happy</option>
+            <option value="🥺😢😭">Sad</option>
+            <option value="🙁😡🤡">Angry</option>
+            <option value="😴🌙✨">Sleepy</option>
+            <option value="💀⚡🌪">Scared</option>
+        </select>
+
+        <button onclick="
+        var selectedMood = document.getElementById('mood-select').value;
+        if (selectedMood) {
+            document.getElementById('mood-emoji').textContent = selectedMood;
+            document.getElementById('weather-info').style.display = 'none';
+        } else {
+            alert('Please select a mood before saving.');
+        }
+    ">Save Mood</button>
+
+    <!-- Display Selected Mood Emoji -->
+    <p id="mood-emoji" style="font-size: 2rem; margin-top: 10px;"></p>
     </div>
     <menu>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="">
