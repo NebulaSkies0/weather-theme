@@ -28,5 +28,7 @@ menu img {
     height: 8em;
     object-fit: fill;
     border-radius: 2em;
-    padding: 1em;
+    border-color: var(--primary);
+    border-style: solid;
+    margin: 1em;
 }
