@@ -31,8 +31,6 @@ async function getWeather(latitude = 35.19879047087778, longitude = -97.44495060
         wind = json.current.wind_speed_10m
 
         readOverrides()
-        updateStyle()
-        updateInformation()
 
     } catch (error) {
         console.error(error.message)
@@ -42,11 +40,15 @@ async function getWeather(latitude = 35.19879047087778, longitude = -97.44495060
 function readOverrides() {
     if (document.getElementById('time_input').value) {
         let input_time = document.getElementById('time_input').value.split(':')
-        console.log(input_time)
         let date = new Date()
+        
         date.setHours(input_time[0])
         date.setMinutes(input_time[1])
-        console.log(date)
+        
+        //if (date.getTime() > sunrise) {
+        //    date.setDate(date.getDate()-1)
+        //    console.log(date)
+        //}
         time = date.getTime()/1000
     }
     if (document.getElementById('temperature_input').value) {
@@ -61,6 +63,9 @@ function readOverrides() {
     if (document.getElementById('wind_input').value) {
         wind = document.getElementById('wind_input').value
     }
+
+    updateInformation()
+    updateStyle()
 }
 
 //Updates all the CSS in the document
@@ -69,9 +74,10 @@ function updateStyle() {
 
     let background = new Color('skyblue')
 
+    //console.log(nightMultiplier())
     background.hsv.v *= nightMultiplier()
 
-    background.hsv.v *= 1 - precipitation / 150
+    background.hsv.v *= 1 - Math.min(precipitation, 8)/10
     background.hsv.s *= 1 - cloud / 100
 
     root.style.setProperty('--background', background.toString())
@@ -91,7 +97,12 @@ function updateInformation() {
 
 //Returns a value to multiply by the background's light value
 function nightMultiplier() {
-    return Math.min(Math.abs(
-        ((time - (sunrise + sunset) / 2) / (sunrise - sunset)) ** 0.5
-    ), 1)
+    
+    return easeInOut(Math.min(Math.abs(
+        ((time - (sunrise + sunset) / 2) / (sunrise - sunset))
+    ), 1))
+}
+
+function easeInOut(x) {
+    return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 }
