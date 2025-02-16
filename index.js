@@ -1,5 +1,3 @@
-import Color from "https://colorjs.io/dist/color.js";
-
 const root = document.querySelector(':root');
 
 let time, sunrise, sunset, temperature, cloud, precipitation, wind
@@ -10,10 +8,10 @@ time = Date.now() / 1000
 //time = time.getTime()/1000
 
 //Gets the weather for OU
-getWeather(35.19879047087778, -97.44495060227347)
+getWeather()
 
 //Requests the API and fills the variables
-async function getWeather(latitude, longitude) {
+async function getWeather(latitude = 35.19879047087778, longitude = -97.44495060227347) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=apparent_temperature,precipitation,cloud_cover,wind_speed_10m&daily=sunrise,sunset&timeformat=unixtime&past_days=1&forecast_days=1`
 
     try {
@@ -32,11 +30,36 @@ async function getWeather(latitude, longitude) {
         precipitation = json.current.precipitation
         wind = json.current.wind_speed_10m
 
+        readOverrides()
         updateStyle()
         updateInformation()
 
     } catch (error) {
         console.error(error.message)
+    }
+}
+
+function readOverrides() {
+    if (document.getElementById('time_input').value) {
+        let input_time = document.getElementById('time_input').value.split(':')
+        console.log(input_time)
+        let date = new Date()
+        date.setHours(input_time[0])
+        date.setMinutes(input_time[1])
+        console.log(date)
+        time = date.getTime()/1000
+    }
+    if (document.getElementById('temperature_input').value) {
+        temperature = document.getElementById('temperature_input').value
+    }
+    if (document.getElementById('cloud_input').value) {
+        cloud = document.getElementById('cloud_input').value
+    }
+    if (document.getElementById('precipitation_input').value) {
+        precipitation = document.getElementById('precipitation_input').value
+    }
+    if (document.getElementById('wind_input').value) {
+        wind = document.getElementById('wind_input').value
     }
 }
 

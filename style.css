@@ -31,3 +31,14 @@ menu img {
     border-style: solid;
     margin: 1em;
 }
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer input {
+    text-align: center;
+    width: 8em;
+    margin: 0.5em;
+}

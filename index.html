@@ -14,9 +14,6 @@
         <span>💧<span id="precipitation">--</span>mm</span>
         <span>🌬️<span id="wind">--</span>km/h</span>
     </header>
-    <div id="weather-info">
-        
-    </div>
     <menu>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="">
         <img src="https://cdn.logojoy.com/wp-content/uploads/20220329171731/tiktok-social-media-app-logo.jpg" alt="">
@@ -27,6 +24,17 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/1200px-Gmail_icon_%282020%29.svg.png" alt="">
         <img src="https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHHFT949fUipzkiFOBH3fAiZZUCdYojwUyX2aTonS1aIwMrx6NUIsHfUHSLzjGJFxxsG72wAo9EWJR4yQWyJJaDb6rYcBtJvTvH3UoAS4JFNDaxGhmKNaMwgElLURlRFeVkLCjkfnXmWtINWZIrPGYq0-&format=source" alt="">
     </menu>
-    <script src="index.js" type="module"></script>
+    <footer>
+        <input type="number" placeholder="Latitude" id="latitude_input">
+        <input type="number" name="longitude" placeholder="Longitude" id="longitude_input">
+        <input type="time" name="time" placeholder="Time" id="time_input">
+        <input type="number" name="temperature" placeholder="Temperature" id="temperature_input">
+        <input type="number" placeholder="Cloud" id="cloud_input">
+        <input type="number" placeholder="Precipitation" id="precipitation_input">
+        <input type="number" name="wind" placeholder="Wind Speed" id="wind_input">
+        <input type="button" onclick="getWeather()" value="Update">
+    </footer>
+    <script src="https://colorjs.io/dist/color.global.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
