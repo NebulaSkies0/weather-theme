@@ -1,3 +1,5 @@
+import Color from "https://colorjs.io/dist/color.js";
+
 const root = document.querySelector(':root');
 
 let time, sunrise, sunset, temperature, cloud, precipitation, wind
@@ -37,9 +39,8 @@ async function getWeather(latitude, longitude){
 function updateStyle() {
     if (!time) return //If there is nothing in time, then the API was probably not reached
 
-    //Examples
-    root.style.setProperty('--background', color(127, 127, 255));
-    root.style.getPropertyValue('--background')
+    let background = new Color("lightblue")
+    root.style.setProperty('--background', background.toString())
 }
 
 //Returns a value between 0-1 for the current progress through the daylight; Negative if night
@@ -50,9 +51,4 @@ function daylight_cycle() {
     else {
         return (time - sunset) / (sunset - sunrise)
     }
-}
-
-//Returns a string for use in CSS
-function color (r, g, b) {
-    return `rgb(${r}, ${g}, ${b})`
 }
