@@ -33,6 +33,7 @@ async function getWeather(latitude, longitude){
         wind = json.current.wind_speed_10m
 
         updateStyle()
+        updateInformation()
 
     } catch (error) {
         console.error(error.message)
@@ -51,6 +52,13 @@ function updateStyle() {
     background.hsv.s *= 1 - cloud/100
 
     root.style.setProperty('--background', background.toString())
+}
+
+function updateInformation() {
+    document.getElementById('temperature').innerHTML = temperature
+    document.getElementById('cloud').innerHTML = cloud
+    document.getElementById('precipitation').innerHTML = precipitation
+    document.getElementById('wind').innerHTML = wind
 }
 
 //Returns a value to multiply by the background's light value
