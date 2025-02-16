@@ -2,7 +2,12 @@ import Color from "https://colorjs.io/dist/color.js";
 
 const root = document.querySelector(':root');
 
-let sunrise, sunset, temperature, cloud, precipitation, wind
+let time, sunrise, sunset, temperature, cloud, precipitation, wind
+
+time = Date.now()/1000
+
+//time = new Date(2025, 1, 16, 1) //Test times
+//time = time.getTime()/1000
 
 //Gets the weather for OU
 getWeather(35.19879047087778, -97.44495060227347)
@@ -20,7 +25,7 @@ async function getWeather(latitude, longitude){
 
         const json = await response.json()
 
-        sunrise = Date.now()/1000 < sunset ? json.daily.sunrise[0] : json.daily.sunrise[1]
+        sunrise = time < sunset ? json.daily.sunrise[0] : json.daily.sunrise[1]
         sunset = json.daily.sunset[0]
         temperature = json.current.apparent_temperature
         cloud = json.current.cloud_cover
@@ -37,12 +42,10 @@ async function getWeather(latitude, longitude){
 //Updates all the CSS in the document
 function updateStyle() {
     if (!sunrise) return //If there is nothing in sunrise, then the API was probably not reached
-    
-    const time = Date.now()/1000
 
-    let background = new Color("lightblue")
+    let background = new Color("skyblue")
 
-    //background.hsv.v *=
+    background.hsv.v *= nightMultiplier()
 
     background.hsv.v *= 1 - precipitation/150
     background.hsv.s *= 1 - cloud/100
@@ -50,22 +53,9 @@ function updateStyle() {
     root.style.setProperty('--background', background.toString())
 }
 
-//Returns a value between 0-1 for the current progress through the daylight; Negative if night
-//function daylight_cycle() {
-//    console.log((Date.UTC(2025, 1, 16, 1)/1000 - sunrise) / (sunset - sunrise))
-//    if (Date.now()/1000 < sunset) {
-//        return (Date.now()/1000 - sunrise) / (sunset - sunrise)
-//    }
-//    else {
-//        return (Date.now()/1000 - sunset) / (sunset - sunrise)
-//    }
-//}
-
-//Doesn't work, but will return a value to multiply by the background's light value
+//Returns a value to multiply by the background's light value
 function nightMultiplier() {
-    let time = new Date(2025, 1, 16, 0)
-    console.log(time)
-    time = time.getTime()/1000
-
-    console.log((time - sunrise) / (sunrise - sunset))
+    return Math.min(Math.abs(
+        ((time - (sunrise+sunset)/2) / (sunrise - sunset))**0.5
+    ), 1)
 }
