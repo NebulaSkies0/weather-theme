@@ -1,11 +1,32 @@
 :root {
-    --background: #8b008b;
+    --background: #8dbbc9;
+    --text: black;
+    --primary: black;
+    --secondary: black;
+    --tertiary: black;
 }
 
 body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: var(--background);
+    
 }
 
-h1 {
-    color: red;
+header {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+menu img {
+    width: 8em;
+    height: 8em;
+    object-fit: fill;
+    border-radius: 2em;
+    padding: 1em;
 }
