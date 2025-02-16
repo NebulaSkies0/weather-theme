@@ -1,9 +1,7 @@
 :root {
     --background: black;
     --text: black;
-    --primary: black;
-    --secondary: black;
-    --tertiary: black;
+    --accent: black;
 }
 
 body {
