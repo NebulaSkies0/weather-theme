@@ -1,6 +1,9 @@
 :root {
-    --background: white;
-    --text: black
+    --background: black;
+    --text: black;
+    --primary: black;
+    --secondary: black;
+    --tertiary: black;
 }
 
 body {
@@ -9,5 +12,5 @@ body {
 }
 
 h1 {
-    color: red;
+    color: var(--primary);
 }
